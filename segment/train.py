@@ -341,9 +341,9 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
                 # Mosaic plots
                 if plots:
                     if ni < 3:
-                        plot_images_and_masks(imgs, targets, masks, paths, save_dir / f"train_batch{ni}.jpg")
+                        plot_images_and_masks(imgs, targets, masks, paths, save_dir / f"train_batch{ni}1.jpg")
                     if ni == 10:
-                        files = sorted(save_dir.glob('train*.jpg'))
+                        files = sorted(save_dir.glob('train*1.jpg'))
                         logger.log_images(files, "Mosaics", epoch)
             # end batch ------------------------------------------------------------------------------------------------
 
@@ -455,7 +455,7 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
             files = [(save_dir / f) for f in files if (save_dir / f).exists()]  # filter
             LOGGER.info(f"Results saved to {colorstr('bold', save_dir)}")
             logger.log_images(files, "Results", epoch + 1)
-            logger.log_images(sorted(save_dir.glob('val*.jpg')), "Validation", epoch + 1)
+            logger.log_images(sorted(save_dir.glob('val*1.jpg')), "Validation", epoch + 1)
     torch.cuda.empty_cache()
     return results
 

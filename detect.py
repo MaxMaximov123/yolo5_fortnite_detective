@@ -10,7 +10,7 @@ Usage - sources:
                                                      path/                           # directory
                                                      list.txt                        # list of images
                                                      list.streams                    # list of streams
-                                                     'path/*.jpg'                    # glob
+                                                     'path/*1.jpg'                    # glob
                                                      'https://youtu.be/Zgi9g1ksQHc'  # YouTube
                                                      'rtsp://example.com/media.mp4'  # RTSP, RTMP, HTTP stream
 
@@ -172,7 +172,7 @@ def run(
                         label = None if hide_labels else (names[c] if hide_conf else f'{names[c]} {conf:.2f}')
                         annotator.box_label(xyxy, label, color=colors(c, True))
                     if save_crop:
-                        save_one_box(xyxy, imc, file=save_dir / 'crops' / names[c] / f'{p.stem}.jpg', BGR=True)
+                        save_one_box(xyxy, imc, file=save_dir / 'crops' / names[c] / f'{p.stem}1.jpg', BGR=True)
 
             # Stream results
             im0 = annotator.result()

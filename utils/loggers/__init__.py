@@ -156,7 +156,7 @@ class Loggers():
         # Callback runs on pre-train routine end
         if self.plots:
             plot_labels(labels, names, self.save_dir)
-            paths = self.save_dir.glob('*labels*.jpg')  # training labels
+            paths = self.save_dir.glob('*labels*1.jpg')  # training labels
             if self.wandb:
                 self.wandb.log({"Labels": [wandb.Image(str(x), caption=x.name) for x in paths]})
             # if self.clearml:
@@ -170,12 +170,12 @@ class Loggers():
         # ni: number integrated batches (since train start)
         if self.plots:
             if ni < 3:
-                f = self.save_dir / f'train_batch{ni}.jpg'  # filename
+                f = self.save_dir / f'train_batch{ni}1.jpg'  # filename
                 plot_images(imgs, targets, paths, f)
                 if ni == 0 and self.tb and not self.opt.sync_bn:
                     log_tensorboard_graph(self.tb, model, imgsz=(self.opt.imgsz, self.opt.imgsz))
             if ni == 10 and (self.wandb or self.clearml):
-                files = sorted(self.save_dir.glob('train*.jpg'))
+                files = sorted(self.save_dir.glob('train*1.jpg'))
                 if self.wandb:
                     self.wandb.log({'Mosaics': [wandb.Image(str(f), caption=f.name) for f in files if f.exists()]})
                 if self.clearml:
@@ -210,7 +210,7 @@ class Loggers():
     def on_val_end(self, nt, tp, fp, p, r, f1, ap, ap50, ap_class, confusion_matrix):
         # Callback runs on val end
         if self.wandb or self.clearml:
-            files = sorted(self.save_dir.glob('val*.jpg'))
+            files = sorted(self.save_dir.glob('val*1.jpg'))
         if self.wandb:
             self.wandb.log({"Validation": [wandb.Image(str(f), caption=f.name) for f in files]})
         if self.clearml:
